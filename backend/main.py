@@ -1,19 +1,19 @@
 from fastapi import FastAPI, Depends
 from app.routers import auth
 from app.core.dependencies import get_current_user, oauth2_scheme
-
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.routers import expense
 
-
-
 app = FastAPI()
 
-from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:3000",
+        "https://velora.vercel.app",  # (we’ll use later)
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
