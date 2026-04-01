@@ -7,34 +7,18 @@ const Card = ({ title, icon: Icon, value, className = '', children }) => {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
-      className={`relative overflow-hidden rounded-2xl p-6 group transition-all duration-300 hover:shadow-xl ${className}`}
-      style={{
-        backgroundColor: 'var(--card-color)',
-        border: '1px solid var(--border-color)',
-      }}
+      whileHover={{ scale: 1.02 }}
+      className={`bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 ${className}`}
     >
-      {/* Subtle top glow on hover */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-purple-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
       {(title || Icon) && (
         <div className="flex justify-between items-center mb-4">
           {title && (
-            <h3
-              className="text-xs font-semibold tracking-widest uppercase"
-              style={{ color: 'var(--muted-color)' }}
-            >
+            <h3 className="text-xs font-semibold tracking-widest uppercase text-slate-500">
               {title}
             </h3>
           )}
           {Icon && (
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-300 group-hover:bg-purple-500/10"
-              style={{
-                backgroundColor: 'rgba(139,92,246,0.08)',
-                border: '1px solid var(--border-color)',
-                color: 'var(--primary-color)',
-              }}
-            >
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-green-50 border border-green-100 text-primary transition-colors duration-300">
               <Icon size={20} />
             </div>
           )}
@@ -42,10 +26,7 @@ const Card = ({ title, icon: Icon, value, className = '', children }) => {
       )}
 
       {value !== undefined && (
-        <div
-          className="text-3xl md:text-4xl font-bold tracking-tight drop-shadow-sm"
-          style={{ color: 'var(--text-color)' }}
-        >
+        <div className="text-3xl md:text-4xl font-bold tracking-tight text-slate-800">
           {value}
         </div>
       )}

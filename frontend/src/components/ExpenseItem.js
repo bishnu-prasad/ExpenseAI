@@ -1,25 +1,33 @@
 import React from 'react';
-import { Trash2, Coffee, ShoppingBag, Car, Home, Zap, Heart, Monitor } from 'lucide-react';
+import { Trash2, Edit2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+
+const formatINR = (value) => {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    minimumFractionDigits: 2,
+  }).format(value);
+};
 
 const getCategoryStyle = (category) => {
   const cat = category?.toLowerCase() || '';
-  if (cat.includes('food') || cat.includes('coffee') || cat.includes('dining'))
-    return { icon: <Coffee size={20} />, color: 'text-orange-400', bg: 'bg-orange-500/10', border: 'border-orange-500/20' };
-  if (cat.includes('shopping') || cat.includes('clothing'))
-    return { icon: <ShoppingBag size={20} />, color: 'text-pink-400', bg: 'bg-pink-500/10', border: 'border-pink-500/20' };
-  if (cat.includes('transport') || cat.includes('gas') || cat.includes('transit'))
-    return { icon: <Car size={20} />, color: 'text-blue-400', bg: 'bg-blue-500/10', border: 'border-blue-500/20' };
-  if (cat.includes('home') || cat.includes('rent'))
-    return { icon: <Home size={20} />, color: 'text-indigo-400', bg: 'bg-indigo-500/10', border: 'border-indigo-500/20' };
-  if (cat.includes('utility') || cat.includes('electricity'))
-    return { icon: <Zap size={20} />, color: 'text-yellow-400', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20' };
-  if (cat.includes('health') || cat.includes('medical'))
-    return { icon: <Heart size={20} />, color: 'text-red-400', bg: 'bg-red-500/10', border: 'border-red-500/20' };
-  return { icon: <Monitor size={20} />, color: 'text-purple-400', bg: 'bg-purple-500/10', border: 'border-purple-500/20' };
+  
+  if (cat.includes('food') || cat.includes('dining')) {
+    return { icon: '🍔', color: 'text-orange-600', bg: 'bg-orange-100', border: 'border-orange-200' };
+  }
+  if (cat.includes('travel') || cat.includes('transport') || cat.includes('flight')) {
+    return { icon: '✈️', color: 'text-blue-600', bg: 'bg-blue-100', border: 'border-blue-200' };
+  }
+  if (cat.includes('groceries') || cat.includes('shopping') || cat.includes('mart')) {
+    return { icon: '🛒', color: 'text-green-600', bg: 'bg-green-100', border: 'border-green-200' };
+  }
+  
+  // Default/Others
+  return { icon: '📦', color: 'text-purple-600', bg: 'bg-purple-100', border: 'border-purple-200' };
 };
 
-const ExpenseItem = ({ expense, onDelete, index }) => {
+const ExpenseItem = ({ expense, onEdit, onDelete, index }) => {
   const style = getCategoryStyle(expense.category);
 
   return (
@@ -27,61 +35,57 @@ const ExpenseItem = ({ expense, onDelete, index }) => {
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.05 }}
-      className="group relative flex items-center justify-between p-5 rounded-2xl transition-all duration-300 hover:shadow-lg"
-      style={{
-        backgroundColor: 'var(--card-color)',
-        border: '1px solid var(--border-color)',
-      }}
+      whileHover={{ scale: 1.01 }}
+      className="group relative flex items-center justify-between p-5 bg-white rounded-xl border border-slate-200 transition-all duration-300 hover:shadow-md"
     >
       <div className="flex items-center gap-5">
         <div
-          className={`w-12 h-12 rounded-xl flex items-center justify-center ${style.bg} ${style.border} border ${style.color} shadow-inner flex-shrink-0`}
+          className={`w-12 h-12 rounded-xl flex items-center justify-center ${style.bg} border ${style.border} text-xl flex-shrink-0`}
         >
           {style.icon}
         </div>
 
         <div className="flex flex-col gap-1">
-          <span
-            className="font-semibold text-lg tracking-tight transition-colors group-hover:text-purple-500"
-            style={{ color: 'var(--text-color)' }}
-          >
+          <span className="font-semibold text-lg tracking-tight text-slate-800 transition-colors group-hover:text-primary">
             {expense.title}
           </span>
           <div className="flex items-center gap-3">
             <span
               className={`text-[11px] uppercase tracking-wider font-bold px-2.5 py-1 rounded-full ${style.bg} ${style.color} border ${style.border}`}
             >
-              {expense.category || 'Uncategorized'}
+              {expense.category || 'Others'}
             </span>
-            <span
-              className="text-sm"
-              style={{ color: 'var(--muted-color)' }}
-            >
+            <span className="text-sm text-slate-500">
               Just added
             </span>
           </div>
         </div>
       </div>
 
-      <div className="flex items-center gap-6">
-        <div
-          className="text-xl font-bold font-mono"
-          style={{ color: 'var(--text-color)' }}
-        >
-          ${expense.amount.toFixed(2)}
+      <div className="flex items-center gap-4">
+        <div className="text-xl font-bold font-mono text-slate-800 mr-2">
+          {formatINR(expense.amount)}
         </div>
 
-        <div className="w-px h-10 hidden sm:block" style={{ backgroundColor: 'var(--border-color)' }} />
+        <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <button
+            onClick={() => onEdit(expense)}
+            className="p-2 rounded-xl text-slate-400 hover:text-blue-600 hover:bg-blue-50 hover:shadow-sm transition-all focus:opacity-100"
+            title="Edit Expense"
+            aria-label="Edit Expense"
+          >
+            <Edit2 size={18} />
+          </button>
 
-        <button
-          onClick={() => onDelete(expense.id)}
-          className="p-2.5 rounded-xl hover:text-red-400 hover:bg-red-500/10 hover:shadow-[0_0_15px_rgba(239,68,68,0.2)] transition-all duration-200 opacity-0 group-hover:opacity-100 focus:opacity-100"
-          style={{ color: 'var(--muted-color)' }}
-          title="Delete Expense"
-          aria-label="Delete Expense"
-        >
-          <Trash2 size={20} />
-        </button>
+          <button
+            onClick={() => onDelete(expense.id)}
+            className="p-2 rounded-xl text-slate-400 hover:text-red-500 hover:bg-red-50 hover:shadow-sm transition-all focus:opacity-100"
+            title="Delete Expense"
+            aria-label="Delete Expense"
+          >
+            <Trash2 size={18} />
+          </button>
+        </div>
       </div>
     </motion.div>
   );

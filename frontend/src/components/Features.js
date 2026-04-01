@@ -8,47 +8,47 @@ const Features = () => {
       icon: <BrainCircuit size={28} />,
       title: "AI Categorization",
       description: "Our intelligence engine instantly assigns categories to your raw transactions, saving you hours of manual tagging.",
-      color: "from-purple-500/20 to-transparent",
-      iconColor: "text-purple-400",
-      borderColor: "border-purple-500/30"
+      iconColor: "text-green-600",
+      bgColor: "bg-green-50",
+      borderColor: "border-green-100"
     },
     {
       icon: <LineChart size={28} />,
       title: "Smart Analytics",
       description: "Visualize your financial health with interactive donuts, bar variations, and completely responsive insights.",
-      color: "from-blue-500/20 to-transparent",
-      iconColor: "text-blue-400",
-      borderColor: "border-blue-500/30"
+      iconColor: "text-emerald-600",
+      bgColor: "bg-emerald-50",
+      borderColor: "border-emerald-100"
     },
     {
       icon: <Wallet size={28} />,
       title: "Real-time Tracking",
       description: "Easily log expenses and watch your analytics dashboard update instantly with secure, blazing-fast integrations.",
-      color: "from-emerald-500/20 to-transparent",
-      iconColor: "text-emerald-400",
-      borderColor: "border-emerald-500/30"
+      iconColor: "text-teal-600",
+      bgColor: "bg-teal-50",
+      borderColor: "border-teal-100"
     }
   ];
 
   return (
-    <section className="w-full py-24 lg:py-32 relative z-10" id="features">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="w-full py-24 lg:py-32 bg-slate-50 relative z-10" id="features">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         
         <div className="text-center max-w-2xl mx-auto mb-20">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-6"
+            className="text-3xl md:text-5xl font-bold tracking-tight text-slate-800 mb-6"
           >
-            Built for modern <span className="text-gradient">finances</span>
+            Built for modern <span className="text-primary">finances</span>
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-lg text-gray-400"
+            className="text-lg text-slate-500"
           >
             We've stripped away the complexity leaving you with a radically simple dashboard that does the heavy lifting for you.
           </motion.p>
@@ -62,17 +62,15 @@ const Features = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.5 }}
-              whileHover={{ y: -5 }}
-              className="bg-white/[0.02] border border-white/5 backdrop-blur-sm rounded-3xl p-8 hover:bg-white/[0.04] transition-all duration-300 relative overflow-hidden group"
+              whileHover={{ y: -5, scale: 1.02 }}
+              className="bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-md transition-all duration-300 relative overflow-hidden group"
             >
-              <div className={`absolute top-0 inset-x-0 h-32 bg-gradient-to-b ${feature.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
-              
-              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-white/5 border ${feature.borderColor} ${feature.iconColor} mb-6 shadow-inner relative z-10`}>
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${feature.bgColor} border ${feature.borderColor} ${feature.iconColor} mb-6 transition-all group-hover:scale-110`}>
                 {feature.icon}
               </div>
               
-              <h3 className="text-xl font-bold text-white mb-4 relative z-10 tracking-tight">{feature.title}</h3>
-              <p className="text-gray-400 leading-relaxed relative z-10">{feature.description}</p>
+              <h3 className="text-xl font-bold text-slate-800 mb-4 tracking-tight">{feature.title}</h3>
+              <p className="text-slate-500 leading-relaxed">{feature.description}</p>
             </motion.div>
           ))}
         </div>

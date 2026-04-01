@@ -1,38 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ─── CSS Variables ──────────────────────────────────── */
+/* ─── Light SaaS Theme Variables ──────────────────────────────────── */
 :root {
-  --bg-color: #0a0f1a;
-  --card-color: #10141A;
-  --text-color: #e5e7eb;
-  --muted-color: #9ca3af;
-  --border-color: rgba(255, 255, 255, 0.08);
-  --primary-color: #a78bfa;
-  --accent-color: #8b5cf6;
-  --nav-bg: rgba(10, 15, 26, 0.92);
-  --input-bg: rgba(0, 0, 0, 0.45);
-  --input-border: rgba(255, 255, 255, 0.1);
-  --input-text: #ffffff;
-  --input-placeholder: #6b7280;
-  --input-label: #9ca3af;
-}
-
-body.light {
-  --bg-color: #f1f5f9;
+  --bg-color: #f8fafc;
   --card-color: #ffffff;
-  --text-color: #1e293b;
-  --muted-color: #64748b;
-  --border-color: rgba(0, 0, 0, 0.08);
-  --primary-color: #7c3aed;
-  --accent-color: #7c3aed;
+  --text-main: #0f172a;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+  --primary-color: #16a34a;   /* Finance Green */
+  --primary-hover: #15803d;
+  --accent-color: #22c55e;
   --nav-bg: rgba(255, 255, 255, 0.95);
   --input-bg: #ffffff;
-  --input-border: #cbd5e1;
-  --input-text: #1e293b;
-  --input-placeholder: #94a3b8;
-  --input-label: #64748b;
+  --input-border: #d1d5db;
+  --input-text: #0f172a;
+  --input-placeholder: #9ca3af;
 }
 
 /* ─── Base ──────────────────────────────────────────── */
@@ -40,16 +26,16 @@ body.light {
   box-sizing: border-box;
 }
 
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  font-family: 'Inter', system-ui, sans-serif;
+html {
+  scroll-behavior: smooth;
 }
 
-/* ─── Gradient ───────────────────────────────────────── */
-.bg-gradient-premium {
-  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ─── Components ────────────────────────────────────── */
@@ -61,40 +47,36 @@ body {
   }
 
   .btn-primary {
-    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
-    @apply text-white shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] hover:opacity-90;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    @apply shadow-sm hover:opacity-90 active:scale-[0.98];
   }
 
   .btn-outline {
     @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200 outline-none;
     background-color: var(--card-color);
-    color: var(--text-color);
+    color: var(--text-main);
     border: 1px solid var(--border-color);
   }
 
   .btn-outline:hover {
-    border-color: var(--accent-color);
+    border-color: var(--primary-color);
+    background-color: #f1f5f9;
   }
 
   .btn-icon {
-    @apply p-2 rounded-lg transition-colors;
-    color: var(--muted-color);
+    @apply p-2 rounded-lg transition-colors duration-200;
+    color: var(--text-secondary);
   }
 
   .btn-icon:hover {
-    color: var(--text-color);
+    color: var(--text-main);
+    background-color: #f1f5f9;
   }
 
-  /* Glass Panel */
-  .glass-panel {
-    @apply rounded-2xl shadow-lg;
-    background-color: var(--card-color);
-    border: 1px solid var(--border-color);
-  }
-
-  /* Universal input-field */
+  /* Universal input-field strictly for modern placeholders/label above */
   .input-field {
-    @apply w-full rounded-xl px-4 pt-6 pb-2 text-sm font-medium transition-all duration-200 outline-none;
+    @apply w-full rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 outline-none;
     background-color: var(--input-bg);
     border: 1px solid var(--input-border);
     color: var(--input-text);
@@ -105,84 +87,43 @@ body {
   }
 
   .input-field:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15); /* Green ring */
   }
 
-  /* Floating label partner of input-field */
-  .floating-label {
-    @apply absolute left-4 top-2 text-[10px] font-semibold uppercase tracking-wider pointer-events-none transition-all duration-200;
-    color: var(--accent-color);
+  /* Simple top label */
+  .input-label {
+    @apply block text-sm font-semibold mb-2;
+    color: var(--text-main);
   }
-
-  /* When peer (input) shows placeholder → label drops to mid position */
-  .peer:placeholder-shown ~ .floating-label {
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.875rem;
-    font-weight: 400;
-    text-transform: none;
-    letter-spacing: 0;
-    color: var(--input-placeholder);
-  }
-
-  /* When peer is focused → label floats back up */
-  .peer:not(:placeholder-shown) ~ .floating-label,
-  .peer:focus ~ .floating-label {
-    top: 0.4rem;
-    transform: translateY(0);
-    font-size: 0.625rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--accent-color);
-  }
-}
-
-/* ─── Surface Utilities ─────────────────────────────── */
-.bg-surface {
-  background-color: var(--card-color);
-}
-
-.bg-surface-hover {
-  background-color: var(--card-color);
-  opacity: 0.9;
-}
-
-.border-border {
-  border-color: var(--border-color);
-}
-
-.text-primary {
-  color: var(--primary-color);
 }
 
 /* ─── Chart Tooltip ─────────────────────────────────── */
 .custom-chart-tooltip {
   background-color: var(--card-color);
-  @apply rounded-xl p-3 shadow-xl;
+  @apply rounded-xl p-3 shadow-lg;
   border: 1px solid var(--border-color);
 }
 
 .custom-chart-tooltip .label {
-  color: var(--muted-color);
-  @apply text-xs uppercase tracking-wider mb-1;
+  color: var(--text-secondary);
+  @apply text-xs uppercase tracking-wider mb-1 font-semibold;
 }
 
 .custom-chart-tooltip .value {
-  color: var(--text-color);
-  @apply text-lg font-bold font-mono;
+  color: var(--text-main);
+  @apply text-lg font-bold;
 }
 
 /* ─── Skeleton Loader ───────────────────────────────── */
 @keyframes skeleton-pulse {
-  0%, 100% { opacity: 0.5; }
+  0%, 100% { opacity: 0.6; }
   50%       { opacity: 1; }
 }
 
 .skeleton {
   border-radius: 8px;
-  background: var(--border-color);
+  background: #e2e8f0;
   animation: skeleton-pulse 1.6s ease-in-out infinite;
 }
 
@@ -190,6 +131,9 @@ body {
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: var(--border-color);
+  background: #cbd5e1;
   border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }

@@ -6,25 +6,33 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#0B0F14',
-        surface: 'rgba(255, 255, 255, 0.03)',
-        "surface-hover": 'rgba(255, 255, 255, 0.06)',
-        border: 'rgba(255, 255, 255, 0.08)',
+        background: '#f8fafc',
+        surface: '#ffffff',
+        "surface-hover": '#f1f5f9',
+        border: '#e2e8f0',
         primary: {
-          DEFAULT: '#8b5cf6',
-          glow: 'rgba(139, 92, 246, 0.4)'
+          DEFAULT: '#16a34a',
+          hover: '#15803d',
+          glow: 'rgba(22, 163, 74, 0.2)'
         },
         accent: {
-          green: '#10B981',
-          orange: '#F59E0B'
+          DEFAULT: '#22c55e',
+          hover: '#16a34a'
+        },
+        slate: {
+          800: '#1e293b',
+          700: '#334155',
+          600: '#475569',
+          500: '#64748b',
+          400: '#94a3b8',
+          300: '#cbd5e1',
+          200: '#e2e8f0',
+          100: '#f1f5f9',
+          50: '#f8fafc',
         }
       },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-premium': 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
-      },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
       },
     },
   },
