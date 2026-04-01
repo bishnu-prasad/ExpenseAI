@@ -8,12 +8,11 @@ from app.routers import expense
 app = FastAPI()
 
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "https://velora-ten-gules.vercel.app",  # (we’ll use later)
-    ],
+    allow_origins=["*"],  # 🔥 FORCE ALLOW EVERYTHING
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
