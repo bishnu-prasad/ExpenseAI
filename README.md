@@ -1,3 +1,13 @@
+<img width="2940" height="1640" alt="Image 05-04-26 at 7 09 PM" src="https://github.com/user-attachments/assets/1986b826-23ce-4391-ab25-acf85b8ed8c6" />
+<img width="2920" height="1624" alt="Image 22-04-26 at 10 43 PM (1)" src="https://github.com/user-attachments/assets/9e121d02-1f92-4f35-87e5-43b3489970d1" />
+<img width="2892" height="1658" alt="Image 22-04-26 at 10 53 PM" src="https://github.com/user-attachments/assets/a88ce445-c150-4b98-81fe-f541da6bad13" />
+<img width="2893" height="1639" alt="Image 22-04-26 at 10 53 PM (1)" src="https://github.com/user-attachments/assets/c5589380-3b06-4f30-a94d-810ed0fd5997" />
+<img width="2903" height="1646" alt="Image 22-04-26 at 10 54 PM" src="https://github.com/user-attachments/assets/f2fbc579-a904-44f1-ad7c-55855af278cb" />
+
+
+
+
+
 
 # 🚀 Velora — Smart Expense Tracking for Modern India
 
